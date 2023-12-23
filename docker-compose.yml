@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  php-apache:
+    container_name: backend-pt
+    build: ./docker
+    image: php:apache
+    ports:
+      - "8080:80"
+      - "9003:9003"
+    volumes:
+      - ./:/var/www
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: backendpt
+      MYSQL_USER: backendpt
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql
+    ports:
+      - "8181:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
