@@ -29,16 +29,7 @@ require __DIR__ . '/../vendor/autoload.php';
 // Injection Dependency
 $container = new Container();
 
-// $container->set(DBConnectionInterface::class, function () {
-//     $dbname = "backendpt";
-//     $host = "localhost:3306";
-//     $username = "root";
-//     $password  = "password";
-//     return new MySQMySqlConnection($host, $dbname, $username, $password);
-// });
-
 $container->set(UserRepositoryInterface::class, function (ContainerInterface $container) {
-    //$db = $container->get(UserRepositoryInterface::class);
     return new UserRepository();
 });
 
