@@ -72,10 +72,6 @@ $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Routes
-$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
-    phpinfo();
-    return $response;
-});
 $app->group('/api', function (RouteCollectorProxy $group) {
     $group->group('/users', function (RouteCollectorProxy $group) {
         $group->get('', UserController::class . ':getAll');
